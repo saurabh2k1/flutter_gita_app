@@ -91,6 +91,7 @@ class Verse {
   final int chapterNumber;
   final String text;
   final String transliteration;
+  final String wordMeanings;
   final List<Translation> translations;
   final List<Commentary> commentaries;
 
@@ -100,6 +101,7 @@ class Verse {
     required this.chapterNumber,
     required this.text,
     required this.translations,
+    required this.wordMeanings,
     required this.transliteration,
     required this.commentaries,
   });
@@ -119,6 +121,7 @@ class Verse {
       chapterNumber: json['chapter_number'],
       text: json['text'],
       transliteration: json['transliteration'],
+      wordMeanings: json['word_meanings'],	
       translations: translations,
       commentaries: commentaries,
     );

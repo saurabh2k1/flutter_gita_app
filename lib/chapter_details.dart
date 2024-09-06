@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gita_app/api_service.dart';
 import 'package:flutter_gita_app/verse_details.dart';
 import 'package:provider/provider.dart';
@@ -17,11 +18,20 @@ class ChapterDetailPage extends StatefulWidget {
 class _ChapterDetailPageState extends State<ChapterDetailPage> {
   late Future<List<Verse>> futureVerses;
   final ApiService apiService = ApiService();
+  String _preferredAuthor = '';
 
   @override
   void initState() {
     super.initState();
     futureVerses = apiService.getVerseByChapter(widget.chapter.id);
+    _loadPreferredAuthor(); 
+  }
+
+  _loadPreferredAuthor() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _preferredAuthor = prefs.getString('preferredAuthor') ?? '';
+    });
   }
 
   @override
@@ -78,7 +88,7 @@ class _ChapterDetailPageState extends State<ChapterDetailPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    VerseDetailsPage(verse: verse),
+                                    VerseDetailsPage(verse: verse, preferredAuthor: _preferredAuthor,),
                               ),
                             );
                           },
