@@ -7,12 +7,9 @@ import 'chapter_list.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
-    create: (context) => LanguageProvider(), 
-    child:  const MyApp(),
-  )
-);
-  
-  
+    create: (context) => LanguageProvider(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -21,14 +18,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context);
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
-        useMaterial3: true,
-      ),
-      home:  const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+          useMaterial3: true,
+        ),
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        routes: {'/settings': (context) => const SettingsPage()},
+        locale: languageProvider.isEnglish
+            ? const Locale('en')
+            : const Locale('hi'));
   }
 }
 
@@ -51,7 +52,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -70,17 +70,19 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
         actions: [
-          IconButton(onPressed: (){
-            Navigator.push(
-              context, 
-              MaterialPageRoute(
-                builder: (context) => const SettingsPage(),
-              )
-            );
-          }, icon: const Icon(Icons.settings),)
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsPage(),
+                  ));
+            },
+            icon: const Icon(Icons.settings),
+          )
         ],
       ),
-      body:  const Center(
+      body: const Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: ChapterList(),
@@ -88,5 +90,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-

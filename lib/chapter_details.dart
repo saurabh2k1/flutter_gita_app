@@ -19,18 +19,22 @@ class _ChapterDetailPageState extends State<ChapterDetailPage> {
   late Future<List<Verse>> futureVerses;
   final ApiService apiService = ApiService();
   String _preferredAuthor = '';
+  String _preferredCommentAuthor = '';
 
   @override
   void initState() {
     super.initState();
     futureVerses = apiService.getVerseByChapter(widget.chapter.id);
-    _loadPreferredAuthor(); 
+    _loadPreferredAuthor();
   }
 
   _loadPreferredAuthor() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _preferredAuthor = prefs.getString('preferredAuthor') ?? '';
+      _preferredAuthor =
+          prefs.getString('preferredAuthor') ?? 'Swami Sivananda';
+      _preferredCommentAuthor =
+          prefs.getString('preferredCommentAuthor') ?? 'Sri Vallabhacharya';
     });
   }
 
@@ -87,8 +91,11 @@ class _ChapterDetailPageState extends State<ChapterDetailPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    VerseDetailsPage(verse: verse, preferredAuthor: _preferredAuthor,),
+                                builder: (context) => VerseDetailsPage(
+                                  verse: verse,
+                                  preferredAuthor: _preferredAuthor,
+                                  commentAuthor: _preferredCommentAuthor,
+                                ),
                               ),
                             );
                           },

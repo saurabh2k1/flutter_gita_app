@@ -7,17 +7,28 @@ import 'package:provider/provider.dart';
 class VerseDetailsPage extends StatelessWidget {
   final Verse verse;
   final String preferredAuthor;
+  final String commentAuthor;
 
-  const VerseDetailsPage({super.key, required this.verse, required this.preferredAuthor});
+  const VerseDetailsPage({
+    super.key,
+    required this.verse,
+    required this.preferredAuthor,
+    required this.commentAuthor,
+  });
 
   @override
   Widget build(BuildContext context) {
     // final languageProvider = Provider.of<LanguageProvider>(context);
-    
-    final preferredTranslation = verse.translations.firstWhere((translation) => translation.authorName == preferredAuthor); 
+
+    final preferredTranslation = verse.translations
+        .firstWhere((translation) => translation.authorName == preferredAuthor);
+    final preferredCommentary = verse.commentaries
+        .firstWhere((commentary) => commentary.authorName == commentAuthor);
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(),
-        body: Center(
+        body: SingleChildScrollView(
+            child: Center(
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -30,7 +41,8 @@ class VerseDetailsPage extends StatelessWidget {
                 Text(
                   verse.text,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 18, color: Colors.deepOrange),
+                  style:
+                      const TextStyle(fontSize: 18, color: Colors.deepOrange),
                 ),
                 const SizedBox(
                   height: 20,
@@ -38,27 +50,50 @@ class VerseDetailsPage extends StatelessWidget {
                 const Text('*********** Transliteration ***********'),
                 Text(
                   verse.transliteration,
-                  style: const TextStyle(fontSize: 18, fontStyle: FontStyle.italic, color: Colors.amber),
+                  style: const TextStyle(
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.amber),
                   textAlign: TextAlign.center,
                 ),
-                
                 const SizedBox(
                   height: 20,
                 ),
                 const Text('*********** Word Meaning ***********'),
-                Text(verse.wordMeanings, style: const TextStyle(fontSize: 18,)),
+                Text(verse.wordMeanings,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    )),
                 const SizedBox(
                   height: 20,
                 ),
-                const Text('*********** Commentary ***********'),
-                Text(preferredTranslation.description, style: const TextStyle(fontSize: 14),),
+                const Text('*********** Translation ***********'),
                 Text(
-                    '- ${preferredTranslation.authorName}',
-                    style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
-                  ),
+                  preferredTranslation.description,
+                  style: const TextStyle(fontSize: 16),
+                ),
+                Text(
+                  '- ${preferredTranslation.authorName}',
+                  style: const TextStyle(
+                      fontSize: 12, fontStyle: FontStyle.italic),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text('*********** Commentory ***********'),
+                Text(preferredCommentary.language),
+                Text(
+                  preferredCommentary.description,
+                  style: const TextStyle(fontSize: 16),
+                ),
+                Text(
+                  '- ${preferredCommentary.authorName}',
+                  style: const TextStyle(
+                      fontSize: 12, fontStyle: FontStyle.italic),
+                ),
               ],
             ),
           ),
-        ));
+        )));
   }
 }
