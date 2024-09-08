@@ -87,14 +87,17 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          const Expanded(child: RandomVerse()),
-          const Divider(),
-          Expanded(child: ChapterListWidget()),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(child: RandomVerse()),
+            const Divider(),
+            Expanded(child: ChapterListWidget()),
+          ],
+        ),
       ),
     );
   }
