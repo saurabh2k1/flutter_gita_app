@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gita_app/widgets/chapter_list.dart';
+import 'package:flutter_gita_app/widgets/random_verse.dart';
 import 'package:provider/provider.dart';
 import 'language_provider.dart';
 import 'pages/settings.dart';
@@ -25,7 +27,10 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
           useMaterial3: true,
         ),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        home: MyHomePage(
+            title: languageProvider.isEnglish
+                ? 'Sri Mad Bhagwad Gita'
+                : 'श्रीमद् भगवद् गीता'),
         routes: {'/settings': (context) => const SettingsPage()},
         locale: languageProvider.isEnglish
             ? const Locale('en')
@@ -82,10 +87,14 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: const Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: ChapterList(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          const Expanded(child: RandomVerse()),
+          const Divider(),
+          Expanded(child: ChapterListWidget()),
+        ],
       ),
     );
   }
