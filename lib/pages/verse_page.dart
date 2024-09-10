@@ -22,7 +22,14 @@ class _VersePageState extends State<VersePage> {
   void initState() {
     super.initState();
     _isLoading = true;
-    localJsonService.fetchVerse(widget.chapterId, widget.verseId).then((value) {
+    _loadVerse(widget.chapterId, widget.verseId);
+  }
+
+  _loadVerse(int chapterId, int verseId) {
+    setState(() {
+      _isLoading = true;
+    });
+    localJsonService.fetchVerse(chapterId, verseId).then((value) {
       setState(() {
         _verse = value;
         _isLoading = false;
@@ -34,7 +41,17 @@ class _VersePageState extends State<VersePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chapter ${widget.chapterId}, Verse ${widget.verseId}'),
+        title: Text('Chapter ${_verse.chapter}, Verse ${_verse.verse}'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.navigate_next),
+            tooltip: 'Go to next Slok',
+            onPressed: () {
+              // Refresh the page with next slok
+              _loadVerse(_verse.chapter?? 1, _verse.verse! + 1);
+            },
+          )
+        ],
       ),
       body: Container(
         alignment: Alignment.center,
@@ -82,6 +99,13 @@ class _VersePageState extends State<VersePage> {
                   ),
                 ),
               ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+              // Refresh the page with next slok
+              _loadVerse(_verse.chapter?? 1, _verse.verse! + 1);
+            },
+        child: const Icon(Icons.navigate_next_rounded),
       ),
     );
   }

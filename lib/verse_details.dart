@@ -26,7 +26,17 @@ class VerseDetailsPage extends StatelessWidget {
         .firstWhere((commentary) => commentary.authorName == commentAuthor);
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(),
+        appBar: AppBar(
+          actions: [
+            IconButton (
+              icon: const Icon(Icons.navigate_next),
+              tooltip: 'Go to next Slok',
+              onPressed: () {
+                
+              },
+            ),
+          ],
+        ),
         body: SingleChildScrollView(
             child: Center(
           child: Padding(

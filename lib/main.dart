@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gita_app/services/language_provider.dart';
 import 'package:flutter_gita_app/widgets/chapter_list.dart';
 import 'package:flutter_gita_app/widgets/random_verse.dart';
 import 'package:provider/provider.dart';
-import 'language_provider.dart';
 import 'pages/settings.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'chapter_list.dart';
+import 'generated/l10n.dart';
+
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -20,28 +22,32 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final languageProvider = Provider.of<LanguageProvider>(context);
-    return MaterialApp(
+    return Consumer<LanguageProvider>(
+      builder: (context, languageProvider, child) {
+        return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
           useMaterial3: true,
         ),
-        home: MyHomePage(
-            title: languageProvider.isEnglish
-                ? 'Sri Mad Bhagwad Gita'
-                : 'श्रीमद् भगवद् गीता'),
+        home: MyHomePage(),
         routes: {'/settings': (context) => const SettingsPage()},
-        locale: languageProvider.isEnglish
-            ? const Locale('en')
-            : const Locale('hi'));
-  }
+        locale: languageProvider.locale,
+        localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+        supportedLocales: S.delegate.supportedLocales,
+      );
+  });
+}
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key,});
 
-  final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -53,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text(S.of(context).appTitle),
         actions: [
           IconButton(
             onPressed: () {

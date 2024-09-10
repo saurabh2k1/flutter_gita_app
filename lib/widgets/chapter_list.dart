@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gita_app/language_provider.dart';
 import 'package:flutter_gita_app/pages/chapter_page.dart';
+import 'package:flutter_gita_app/services/language_provider.dart';
 import 'package:flutter_gita_app/services/local_json.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class ChapterListWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final chapter = chapters[index];
                   final selectedLanguage =
-                      languageProvider.isEnglish ? 'en' : 'hi';
+                      languageProvider.locale.languageCode;
                   String nameMeaning = chapter.meaning[selectedLanguage] ??
                       chapter.meaning['en'] as String;
                   return Card(
@@ -39,7 +39,7 @@ class ChapterListWidget extends StatelessWidget {
                         child: Text('${chapter.chapterNumber}'),
                       ),
                       title: Text(
-                        languageProvider.isEnglish
+                        languageProvider.locale.languageCode == 'en'
                             ? chapter.translation
                             : chapter.name,
                         style: TextStyle(
