@@ -24,18 +24,26 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appTitle":
             MessageLookupByLibrary.simpleMessage("Sri Mad Bhagwad Gita"),
+        "available": MessageLookupByLibrary.simpleMessage("Available"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "chapter": MessageLookupByLibrary.simpleMessage("Chapter"),
         "chapters": MessageLookupByLibrary.simpleMessage("Chapters"),
+        "commentary": MessageLookupByLibrary.simpleMessage("Commentary"),
+        "english": MessageLookupByLibrary.simpleMessage("English"),
+        "hindi": MessageLookupByLibrary.simpleMessage("Hindi"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "read": MessageLookupByLibrary.simpleMessage("Read"),
         "readMore": MessageLookupByLibrary.simpleMessage("Read More"),
+        "sanskrit": MessageLookupByLibrary.simpleMessage("Sanskrit"),
         "selectedAuthors":
             MessageLookupByLibrary.simpleMessage("Selected Authors"),
         "selectedLanguages":
-            MessageLookupByLibrary.simpleMessage("Selected Languages"),
+            MessageLookupByLibrary.simpleMessage("Selected Language"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "slok": MessageLookupByLibrary.simpleMessage("Slok"),
-        "todaySlok": MessageLookupByLibrary.simpleMessage("Today\'s Slok")
+        "todaySlok": MessageLookupByLibrary.simpleMessage("Today\'s Slok"),
+        "translateNCommentary": MessageLookupByLibrary.simpleMessage(
+            "for translation and commentary"),
+        "translations": MessageLookupByLibrary.simpleMessage("Translations")
       };
 }

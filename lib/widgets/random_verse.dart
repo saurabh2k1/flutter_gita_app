@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gita_app/models/verse.dart';
+import 'package:flutter_gita_app/generated/l10n.dart';
 import 'package:flutter_gita_app/pages/verse_page.dart';
 import 'package:flutter_gita_app/services/local_json.dart';
+
 
 class RandomVerse extends StatelessWidget {
   RandomVerse({super.key});
@@ -41,9 +42,8 @@ class RandomVerse extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'आज का श्लोक ',
-                          style: TextStyle(
+                        Text(S.of(context).todaySlok,
+                          style: const TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w500,
                               color: Colors.deepOrangeAccent),
@@ -68,8 +68,8 @@ class RandomVerse extends StatelessWidget {
                                   verseId: verse.verse ?? 1);
                             }));
                           },
-                          child: const Text('Read More',
-                              style: TextStyle(
+                          child: Text(S.of(context).readMore,
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold)),
@@ -80,46 +80,6 @@ class RandomVerse extends StatelessWidget {
                 ],
               ),
             );
-
-            // Padding(
-            //   padding: const EdgeInsets.all(16.0),
-            //   child: Column(
-            //     mainAxisAlignment: MainAxisAlignment.start,
-            //     crossAxisAlignment: CrossAxisAlignment.center,
-            //     children: [
-            //       Row(
-            //         mainAxisAlignment: MainAxisAlignment.start,
-            //         children: [
-            //           Text(
-            //             'आज का श्लोक ',
-            //             style: TextStyle(
-            //                 fontSize: 24, color: Colors.orange.shade900),
-            //           ),
-            //         ],
-            //       ),
-            //       Text(
-            //         '${verse.slok}',
-            //         style: const TextStyle(fontSize: 24),
-            //       ),
-            //       Row(
-            //         mainAxisAlignment: MainAxisAlignment.end,
-            //         children: [
-            //           TextButton(
-            //             onPressed: () {
-            //               Navigator.push(context,
-            //                   MaterialPageRoute(builder: (context) {
-            //                 return VersePage(
-            //                     chapterId: verse.chapter ?? 1,
-            //                     verseId: verse.verse ?? 1);
-            //               }));
-            //             },
-            //             child: const Text('Read more'),
-            //           ),
-            //         ],
-            //       )
-            //     ],
-            //   ),
-            // );
           }
         });
   }

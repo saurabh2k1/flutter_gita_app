@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gita_app/generated/l10n.dart';
 import 'package:flutter_gita_app/models/chapter.dart';
 import 'package:flutter_gita_app/pages/verse_page.dart';
+import 'package:flutter_gita_app/services/language_provider.dart';
+import 'package:provider/provider.dart';
 
 class ChapterPage extends StatefulWidget {
   final Chapter chapter;
 
   const ChapterPage({Key? key, required this.chapter}) : super(key: key);
-
   @override
   _ChapterPageState createState() => _ChapterPageState();
 }
 
 class _ChapterPageState extends State<ChapterPage> {
+  
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          title: Text(' अध्याय ${widget.chapter.chapterNumber.toString()}'),
+          title: Text('${S.of(context).chapter}  ${widget.chapter.chapterNumber.toString()}'),
         ),
         body: Container(
           padding: const EdgeInsets.all(16.0),
@@ -34,35 +38,47 @@ class _ChapterPageState extends State<ChapterPage> {
                       fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SelectableText(widget.chapter.translation),
-                SelectableText(widget.chapter.meaning['hi'] ?? ''),
-                SelectableText(widget.chapter.meaning['en'] ?? ''),
-                SelectableText(widget.chapter.summary['hi'] ?? ''),
-                SelectableText(widget.chapter.summary['en'] ?? ''),
+                SelectableText(widget.chapter.meaning[languageProvider.locale.languageCode] ?? ''),
+                SelectableText(widget.chapter.summary[languageProvider.locale.languageCode] ?? ''),
                 const SizedBox(
                   height: 16.0,
                 ),
-                const Text("All Shloka[श्लोक]",
-                    style: TextStyle(fontSize: 32.0, color: Colors.orange)),
+                Text(S.of(context).slok,
+                    style: const TextStyle(fontSize: 32.0, color: Colors.orange)),
                 ListView.builder(
                   itemCount: widget.chapter.versesCount,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                fullscreenDialog: true,
-                                builder: (context) {
-                                  return VersePage(
-                                    chapterId: widget.chapter.chapterNumber,
-                                    verseId: index + 1,
-                                  );
-                                }));
-                      },
-                      title: Text('श्लोक  -   ${index + 1}'),
-                      trailing: const Text('Read [ पढे ]'),
+                    return Card(
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  fullscreenDialog: true,
+                                  builder: (context) {
+                                    return VersePage(
+                                      chapterId: widget.chapter.chapterNumber,
+                                      verseId: index + 1,
+                                    );
+                                  }));
+                        },
+                        tileColor: Colors.orangeAccent,
+                        title: Text('${S.of(context).slok}  -   ${index + 1}', 
+                          style: const TextStyle(
+                            fontSize: 18.0, 
+                            fontWeight: FontWeight.bold, 
+                            color: Colors.brown),
+                        ),
+                        trailing: Text(S.of(context).read, 
+                          style: const TextStyle(
+                            fontSize: 18.0, 
+                            fontWeight: FontWeight.bold, 
+                            color: Colors.brown),
+                        ),
+                        ),
+
                     );
                   },
                 ),

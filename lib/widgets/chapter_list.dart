@@ -12,6 +12,8 @@ class ChapterListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final languageProvider = Provider.of<LanguageProvider>(context);
+    final selectedLanguage =
+                      languageProvider.locale.languageCode;
     return FutureBuilder(
         future: jsonService.fetchAllChapters(),
         builder: (context, snapshot) {
@@ -26,9 +28,7 @@ class ChapterListWidget extends StatelessWidget {
             return ListView.builder(
                 itemCount: chapters.length,
                 itemBuilder: (context, index) {
-                  final chapter = chapters[index];
-                  final selectedLanguage =
-                      languageProvider.locale.languageCode;
+                  final chapter = chapters[index];                  
                   String nameMeaning = chapter.meaning[selectedLanguage] ??
                       chapter.meaning['en'] as String;
                   return Card(

@@ -16,126 +16,80 @@ class SettingsPage extends StatefulWidget {
 class AuthorChoice {
   final String id;
   final String name;
+  final String hindiName;
   final bool ht;
   final bool et;
   final bool hc;
   final bool ec;
   final bool sc;
- const AuthorChoice(this.id, this.name, this.ht, this.et, this.hc, this.ec, this.sc) ;
+ const AuthorChoice(this.id, this.name, this.hindiName, this.ht, this.et, this.hc, this.ec, this.sc) ;
 }
 
 
 
 class _SettingsPageState extends State<SettingsPage> {
-  late String _selectedAuthor;
-  late String _selectedCommentAuthor;
-  List<String> _authors = [];
-  List<String> _commentAuthor = [];
-
+  
   List<AuthorChoice> authors = const [
-    AuthorChoice('tej',  'Swami Tejomayananda',  true,  false,  false,  false,  false),
-    AuthorChoice('siva',  'Swami Sivananda',  false,  true,  false,  true,  false),
-    AuthorChoice('purohit',  'Shri Purohit Swami',  false,  true,  false,  false,  false),
-    AuthorChoice('chinmay',  'Swami Chinmayananda',  false,  false,  true,  false,  false),
-    AuthorChoice('san',  'Dr.S.Sankaranarayan',  false,  true,  false,  false,  false),
-    AuthorChoice('adi',  'Swami Adidevananda',  false,  true,  false,  false,  false),
-    AuthorChoice('gambir',  'Swami Gambirananda',  false,  true,  false,  false,  false),
-    AuthorChoice('madhav',  'Sri Madhavacharya',  false,  false,  false,  false,  true),
-    AuthorChoice('anand',  'Sri Anandgiri',  false,  false,  false,  false,  true),
-    AuthorChoice('rams',  'Swami Ramsukhdas',  true,  false,  true,  false,  false),
-    AuthorChoice('raman',  'Sri Ramanuja',  false,  true,  false,  false,  true),
-    AuthorChoice('abhinav',  'Sri Abhinav Gupta',  false,  true,  false,  false,  true),
-    AuthorChoice('sankar',  'Sri Shankaracharya',  true,  true,  false,  false,  true),
-    AuthorChoice('jaya',  'Sri Jayatritha',  false,  false,  false,  false,  true),
-    AuthorChoice('vallabh',  'Sri Vallabhacharya',  false,  false,  false,  false,  true),
-    AuthorChoice('ms',  'Sri Madhusudan Saraswati',  false,  false,  false,  false,  true),
-    AuthorChoice('srid',  'Sri Sridhara Swami',  false,  false,  false,  false,  true),
-    AuthorChoice('dhan',  'Sri Dhanpati',  false,  false,  false,  false,  true),
-    AuthorChoice('venkat',  'Vedantadeshikacharya Venkatanatha',  false,  false,  false,  false,  true),
-    AuthorChoice('puru', 'Sri Purushottamji',  false,  false,  false,  false,  true),
-    AuthorChoice('neel', 'Sri Neelkanth',  false,  false,  false,  false,  true),
-    AuthorChoice('prabhu', 'A.C. Bhaktivedanta Swami Prabhupada',  false,  true,  false,  true,  false),
+    AuthorChoice('tej',  'Swami Tejomayananda', 'स्वामी तेजोमयानंद', true,  false,  false,  false,  false),
+    AuthorChoice('siva',  'Swami Sivananda', 'स्वामी शिवानंद', false,  true,  false,  true,  false),
+    AuthorChoice('purohit',  'Shri Purohit Swami', 'श्री पुरोहित स्वामी', false,  true,  false,  false,  false),
+    AuthorChoice('chinmay',  'Swami Chinmayananda', 'स्वामी चिन्मयानंद',  false,  false,  true,  false,  false),
+    AuthorChoice('san',  'Dr.S.Sankaranarayan', 'डॉ.एस.शंकरनारायण', false,  true,  false,  false,  false),
+    AuthorChoice('adi',  'Swami Adidevananda', 'स्वामी आदिदेवानंद', false,  true,  false,  false,  false),
+    AuthorChoice('gambir',  'Swami Gambirananda', 'स्वामी गंभीरानंद',  false,  true,  false,  false,  false),
+    AuthorChoice('madhav',  'Sri Madhavacharya', 'श्री माधवाचार्य', false,  false,  false,  false,  true),
+    AuthorChoice('anand',  'Sri Anandgiri', 'श्री आनंदगिरि', false,  false,  false,  false,  true),
+    AuthorChoice('rams',  'Swami Ramsukhdas', 'स्वामी रामसुखदास', true,  false,  true,  false,  false),
+    AuthorChoice('raman',  'Sri Ramanuja', 'श्री रामानुज', false,  true,  false,  false,  true),
+    AuthorChoice('abhinav',  'Sri Abhinav Gupta', 'श्री अभिनव गुप्ता',  false,  true,  false,  false,  true),
+    AuthorChoice('sankar',  'Sri Shankaracharya', 'श्री शंकराचार्य',  true,  true,  false,  false,  true),
+    AuthorChoice('jaya',  'Sri Jayatirtha', 'श्री जयतीर्थ', false,  false,  false,  false,  true),
+    AuthorChoice('vallabh',  'Sri Vallabhacharya', 'श्री वल्लभाचार्य', false,  false,  false,  false,  true),
+    AuthorChoice('ms',  'Sri Madhusudan Saraswati', 'श्री मधुसूदन सरस्वती',  false,  false,  false,  false,  true),
+    AuthorChoice('srid',  'Sri Sridhara Swami', 'श्री श्रीधर स्वामी', false,  false,  false,  false,  true),
+    AuthorChoice('dhan',  'Sri Dhanpati', 'श्री धनपति',  false,  false,  false,  false,  true),
+    AuthorChoice('venkat',  'Vedantadeshikacharya Venkatanatha', 'वेदांतदेशिकाचार्य वेंकटनाथ', false,  false,  false,  false,  true),
+    AuthorChoice('puru', 'Sri Purushottamji', 'श्रीपुरुषोत्तमजी',  false,  false,  false,  false,  true),
+    AuthorChoice('neel', 'Sri Neelkanth', 'श्री नीलकंठ',  false,  false,  false,  false,  true),
+    AuthorChoice('prabhu', 'A.C. Bhaktivedanta Swami Prabhupada', 'ए.सी. भक्तिवेदांत स्वामी प्रभुपाद', false,  true,  false,  true,  false),
   ];
+
+  String? _selectedAuthorId;
 
   @override
   void initState() {
     super.initState();
-    _fetchAuthors();
-    _loadPreferredAuthor();
+    _loadSelectedAuthor();
   }
 
-  _loadPreferredAuthor() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future<void> _loadSelectedAuthor() async {
+    final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _selectedAuthor = prefs.getString('preferredAuthor') ?? 'Swami Sivananda';
-      _selectedCommentAuthor =
-          prefs.getString('preferredCommentAuthor') ?? 'Sri Vallabhacharya';
+      _selectedAuthorId = prefs.getString('selectedAuthorId');
     });
-  }
+  } 
 
-  _fetchAuthors() async {
-    // Fetch authors from API or define statically
-    // Example static list:
+  Future<void> _saveSelectedAuthor(String authorId) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedAuthorId', authorId);
     setState(() {
-      _authors = [
-        'Swami Tejomayananda',
-        'Swami Gambirananda',
-        'Swami Sivananda',
-        'Dr. S. Sankaranarayan',
-        'Shri Purohit Swami',
-        'Swami Ramsukhdas',
-        'Swami Adidevananda'
-      ];
-      _commentAuthor = [
-        'Sri Neelkanth',
-        'Sri Ramanujacharya',
-        'Sri Sridhara Swami',
-        'Sri Vedantadeshikacharya Venkatanatha',
-        'Sri Abhinavgupta',
-        'Sri Jayatritha',
-        'Sri Madhusudan Saraswati',
-        'Sri Purushottamji',
-        'Sri Shankaracharya',
-        'Sri Vallabhacharya',
-        'Swami Sivananda',
-        'Swami Ramsukhdas',
-        'Swami Chinmayananda',
-        'Sri Anandgiri',
-        'Sri Dhanpati',
-        'Sri Madhavacharya',
-      ];
-    });
-  }
-
-  _savePreferredAuthor(String author) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('preferredAuthor', author);
-    setState(() {
-      _selectedAuthor = author;
-    });
-  }
-
-  _savePreferredCommentAuthor(String author) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('preferredCommentAuthor', author);
-    setState(() {
-      _selectedCommentAuthor = author;
+      _selectedAuthorId = authorId;
     });
   }
 
   String getAvailableOptions({required bool ht, required bool et, required bool hc, required bool ec, required bool sc}){
   List<String> options = [];
 
-    if (ht) options.add('Hindi Translations');
-    if (et) options.add('English Translations');
-    if (hc) options.add('Hindi Commentory');
-    if (ec) options.add('English Commentory');
-    if (sc) options.add('Sanskrit Commentory');
+    if (ht) options.add( '${S.of(context).hindi} ${S.of(context).translations}');
+    if (et) options.add('${S.of(context).english} ${S.of(context).translations}');
+    if (hc) options.add('${S.of(context).hindi} ${S.of(context).commentary}');
+    if (ec) options.add('${S.of(context).english} ${S.of(context).commentary}');
+    if (sc) options.add('${S.of(context).sanskrit} ${S.of(context).commentary}');
 
-    return options.isEmpty ? 'No options available' : 'Available options: ${options.join(', ')}';
+    return options.isEmpty ? 'No options available' : '${S.of(context).available}: ${options.join(', ')}';
 }
 
-  int? _selectedIndex;
+
 
   @override
   Widget build(BuildContext context) {
@@ -164,69 +118,30 @@ class _SettingsPageState extends State<SettingsPage> {
                 const   Divider(),
                 ListTile(
                   title: Text(S.of(context).selectedAuthors),
-                  subtitle: const Text('for translation and commentory'),
+                  subtitle: Text(S.of(context).translateNCommentary),
                   tileColor: Colors.orange,
                 ),
                  ListView.builder(
                     itemCount: authors.length,
                     physics: const ClampingScrollPhysics(), 
                     shrinkWrap: true,
-                    itemBuilder: (_, index){
+                    itemBuilder: (context, index){
+                      final author = authors[index];
                       return Card(
                         child: ListTile(
                           leading: Text('${index + 1}'),
-                          title: Text(authors[index].name),
+                          title: Text(languageProvider.locale.languageCode == 'en' ?  authors[index].name : authors[index].hindiName),
                           subtitle: Text(getAvailableOptions(ec: authors[index].ec,  ht: authors[index].ht, et: authors[index].et, hc:  authors[index].hc, sc:  authors[index].sc)),
-                          trailing: _selectedIndex == index ? const Icon(Icons.check) : null,
+                          trailing: _selectedAuthorId == author.id ? const Icon(Icons.check) : null,
                           onTap: (){
-                            setState(() {
-                              if (_selectedIndex == index) {
-                                _selectedIndex = null;
-                              } else {
-                                _selectedIndex = index;
-                              }
-                            });
+                            _saveSelectedAuthor(author.id);
                           },
-                          selected: _selectedIndex == index,
+                          selected: _selectedAuthorId == author.id,
                           selectedTileColor: Colors.deepPurple,
                           selectedColor: Colors.white,
                         ),
                       );
                     }),
-
-
-                // ListTile(
-                //   title: const Text('Preferred Translation By'),
-                //   subtitle: Text(_selectedAuthor),
-                //   trailing: DropdownButton<String>(
-                //     value: _selectedAuthor,
-                //     items: _authors.map((String author) {
-                //       return DropdownMenuItem<String>(
-                //           value: author, child: Text(author));
-                //     }).toList(),
-                //     onChanged: (String? newValue) {
-                //       if (newValue != null) {
-                //         _savePreferredAuthor(newValue);
-                //       }
-                //     },
-                //   ),
-                // ),
-                // ListTile(
-                //   title: const Text('Preferred Commentary By'),
-                //   subtitle: Text(_selectedCommentAuthor),
-                //   trailing: DropdownButton<String>(
-                //     value: _selectedCommentAuthor,
-                //     items: _commentAuthor.map((String commentAuthor) {
-                //       return DropdownMenuItem<String>(
-                //           value: commentAuthor, child: Text(commentAuthor));
-                //     }).toList(),
-                //     onChanged: (String? newValue) {
-                //       if (newValue != null) {
-                //         _savePreferredCommentAuthor(newValue);
-                //       }
-                //     },
-                //   ),
-                // ),
               ],
             ));
           }

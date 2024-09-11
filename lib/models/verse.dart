@@ -54,7 +54,8 @@ class Verse {
       this.venkat,
       this.puru,
       this.neel,
-      this.prabhu});
+      this.prabhu}
+    );
 
   Verse.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];

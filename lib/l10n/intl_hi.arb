@@ -10,5 +10,12 @@
     "next": "अगला",
     "back": "पीछे",
     "selectedLanguages": "चयनित भाषा",
-    "selectedAuthors": "चयनित लेखक"
+    "selectedAuthors": "चयनित लेखक",
+    "commentary": "भाष्य",
+    "translations": "अनुवाद",
+    "hindi": "हिंदी",
+    "english": "अंग्रेज़ी",
+    "sanskrit": "संस्कृत",
+    "translateNCommentary": "अनुवाद और भाष्य के लिए",
+    "available": "उपलब्ध"
 }

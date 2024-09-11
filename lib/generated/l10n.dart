@@ -150,10 +150,10 @@ class S {
     );
   }
 
-  /// `Selected Languages`
+  /// `Selected Language`
   String get selectedLanguages {
     return Intl.message(
-      'Selected Languages',
+      'Selected Language',
       name: 'selectedLanguages',
       desc: '',
       args: [],
@@ -165,6 +165,76 @@ class S {
     return Intl.message(
       'Selected Authors',
       name: 'selectedAuthors',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Commentary`
+  String get commentary {
+    return Intl.message(
+      'Commentary',
+      name: 'commentary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Translations`
+  String get translations {
+    return Intl.message(
+      'Translations',
+      name: 'translations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hindi`
+  String get hindi {
+    return Intl.message(
+      'Hindi',
+      name: 'hindi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message(
+      'English',
+      name: 'english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sanskrit`
+  String get sanskrit {
+    return Intl.message(
+      'Sanskrit',
+      name: 'sanskrit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `for translation and commentary`
+  String get translateNCommentary {
+    return Intl.message(
+      'for translation and commentary',
+      name: 'translateNCommentary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available`
+  String get available {
+    return Intl.message(
+      'Available',
+      name: 'available',
       desc: '',
       args: [],
     );

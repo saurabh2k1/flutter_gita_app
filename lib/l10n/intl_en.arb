@@ -10,5 +10,12 @@
     "next": "Next",
     "back": "Back",
     "selectedLanguages": "Selected Language",
-    "selectedAuthors": "Selected Authors"
+    "selectedAuthors": "Selected Authors",
+    "commentary": "Commentary",
+    "translations": "Translations",
+    "hindi": "Hindi",
+    "english": "English",
+    "sanskrit": "Sanskrit",
+    "translateNCommentary": "for translation and commentary",
+    "available": "Available"
 }

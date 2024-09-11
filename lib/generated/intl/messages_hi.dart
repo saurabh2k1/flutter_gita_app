@@ -23,16 +23,24 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appTitle": MessageLookupByLibrary.simpleMessage("श्रीमद् भगवद् गीता"),
+        "available": MessageLookupByLibrary.simpleMessage("उपलब्ध"),
         "back": MessageLookupByLibrary.simpleMessage("पीछे"),
         "chapter": MessageLookupByLibrary.simpleMessage("अध्याय"),
         "chapters": MessageLookupByLibrary.simpleMessage("अध्याय"),
+        "commentary": MessageLookupByLibrary.simpleMessage("भाष्य"),
+        "english": MessageLookupByLibrary.simpleMessage("अंग्रेज़ी"),
+        "hindi": MessageLookupByLibrary.simpleMessage("हिंदी"),
         "next": MessageLookupByLibrary.simpleMessage("अगला"),
         "read": MessageLookupByLibrary.simpleMessage("पढ़ें"),
         "readMore": MessageLookupByLibrary.simpleMessage("और पढ़ें"),
+        "sanskrit": MessageLookupByLibrary.simpleMessage("संस्कृत"),
         "selectedAuthors": MessageLookupByLibrary.simpleMessage("चयनित लेखक"),
         "selectedLanguages": MessageLookupByLibrary.simpleMessage("चयनित भाषा"),
         "settings": MessageLookupByLibrary.simpleMessage("सेटिंग्स"),
         "slok": MessageLookupByLibrary.simpleMessage("श्लोक"),
-        "todaySlok": MessageLookupByLibrary.simpleMessage("आज का श्लोक")
+        "todaySlok": MessageLookupByLibrary.simpleMessage("आज का श्लोक"),
+        "translateNCommentary":
+            MessageLookupByLibrary.simpleMessage("अनुवाद और भाष्य के लिए"),
+        "translations": MessageLookupByLibrary.simpleMessage("अनुवाद")
       };
 }
