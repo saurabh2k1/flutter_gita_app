@@ -8,8 +8,9 @@ import 'package:provider/provider.dart';
 class ChapterPage extends StatefulWidget {
   final Chapter chapter;
 
-  const ChapterPage({Key? key, required this.chapter}) : super(key: key);
+  const ChapterPage({super.key, required this.chapter});
   @override
+  // ignore: library_private_types_in_public_api
   _ChapterPageState createState() => _ChapterPageState();
 }
 

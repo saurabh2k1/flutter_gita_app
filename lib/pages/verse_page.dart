@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gita_app/generated/l10n.dart';
-import 'package:flutter_gita_app/models/chapter.dart';
 import 'package:flutter_gita_app/models/verse.dart';
 import 'package:flutter_gita_app/services/local_json.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +21,8 @@ class _VersePageState extends State<VersePage> {
   bool _isLoading = true;
   final LocalJsonService localJsonService = LocalJsonService();
   late String selectedAuthor;
+  String _title = "";
+  
   
 
   @override
@@ -31,6 +32,8 @@ class _VersePageState extends State<VersePage> {
     _loadVerse(widget.chapterId, widget.verseId);
   }
 
+  
+
   _loadVerse(int chapterId, int verseId) {
     setState(() {
       _isLoading = true;
@@ -39,6 +42,7 @@ class _VersePageState extends State<VersePage> {
       setState(() {
         _verse = value;
         _isLoading = false;
+        _title = '${S.of(context).chapter} $chapterId, ${S.of(context).slok} $verseId';
       });
     });
     setState(() {
@@ -163,7 +167,7 @@ class _VersePageState extends State<VersePage> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text('${S.of(context).chapter} ${_verse.chapter}, ${S.of(context).slok} ${_verse.verse}'),
+        title: Text(_title),
         actions: [
           IconButton(
             icon: const Icon(Icons.navigate_next),

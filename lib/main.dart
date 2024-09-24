@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
           useMaterial3: true,
         ),
-        home: MyHomePage(),
+        home: const MyHomePage(),
         routes: {'/settings': (context) => const SettingsPage()},
         locale: languageProvider.locale,
         localizationsDelegates: const [
