@@ -3,15 +3,19 @@ import 'package:flutter_gita_app/services/language_provider.dart';
 import 'package:flutter_gita_app/widgets/chapter_list.dart';
 import 'package:flutter_gita_app/widgets/random_verse.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/settings.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'generated/l10n.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
   runApp(ChangeNotifierProvider(
-    create: (context) => LanguageProvider(),
+    create: (context) => LanguageProvider(prefs: prefs),
     child: const MyApp(),
   ));
 }
@@ -79,9 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Expanded(child: RandomVerse()),
+            Flexible(flex: 1, child: RandomVerse()),
             const Divider(),
-            Expanded(child: ChapterListWidget()),
+            Flexible(flex: 2, child: ChapterListWidget()),
           ],
         ),
       ),

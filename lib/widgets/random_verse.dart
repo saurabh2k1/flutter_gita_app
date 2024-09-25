@@ -3,7 +3,6 @@ import 'package:flutter_gita_app/generated/l10n.dart';
 import 'package:flutter_gita_app/pages/verse_page.dart';
 import 'package:flutter_gita_app/services/local_json.dart';
 
-
 class RandomVerse extends StatelessWidget {
   RandomVerse({super.key});
   final LocalJsonService localJsonService = LocalJsonService();
@@ -21,34 +20,42 @@ class RandomVerse extends StatelessWidget {
             return const Center(child: Text('No verse found'));
           } else {
             final verse = snapshot.data!;
-            return Container(
-              alignment: Alignment.topCenter,
-              decoration: BoxDecoration(
-                  image: const DecorationImage(
-                      image: AssetImage('images/1.jpg'), fit: BoxFit.fill),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: AssetImage('images/black_layer.png'),
-                          fit: BoxFit.fill,
-                        ),
-                        borderRadius: BorderRadius.circular(10)),
+            return Stack(
+              children: [
+                Container(
+                  alignment: Alignment.topCenter,
+                  decoration: BoxDecoration(
+                    image: const DecorationImage(
+                      image: AssetImage('images/1.jpg'),
+                      fit: BoxFit.fill,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
+                ),
+                //Black overlay
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: const DecorationImage(
+                        image: AssetImage('images/black_layer.png'),
+                        fit: BoxFit.fill,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.all(12.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(S.of(context).todaySlok,
+                        // Today's Slok
+                        Text(
+                          S.of(context).todaySlok,
                           style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.deepOrangeAccent),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.deepOrangeAccent,
+                          ),
                         ),
-                        const Spacer(),
+                        // Verse text
                         Text(
                           '${verse.slok}',
                           style: const TextStyle(
@@ -56,29 +63,39 @@ class RandomVerse extends StatelessWidget {
                             color: Colors.white,
                           ),
                         ),
-                        const SizedBox(
-                          height: 18.0,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return VersePage(
-                                  chapterId: verse.chapter ?? 1,
-                                  verseId: verse.verse ?? 1);
-                            }));
-                          },
-                          child: Text(S.of(context).readMore,
+                        const Spacer(),
+                        // Read more Button
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => VersePage(
+                                    chapterId: verse.chapter ?? 1,
+                                    verseId: verse.verse ?? 1,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              S.of(context).readMore,
                               style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold)),
-                        )
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+              ],
             );
           }
         });
