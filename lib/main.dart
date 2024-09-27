@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gita_app/pages/splash_screen.dart';
 import 'package:flutter_gita_app/services/language_provider.dart';
 import 'package:flutter_gita_app/widgets/chapter_list.dart';
 import 'package:flutter_gita_app/widgets/random_verse.dart';
@@ -29,12 +30,14 @@ class MyApp extends StatelessWidget {
     return Consumer<LanguageProvider>(
       builder: (context, languageProvider, child) {
         return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Sri Mad Bhagwad Gita',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
           useMaterial3: true,
         ),
-        home: const MyHomePage(),
+        // home: const MyHomePage(),
+        home: const SplashScreen(),
+        debugShowCheckedModeBanner: false,
         routes: {'/settings': (context) => const SettingsPage()},
         locale: languageProvider.locale,
         localizationsDelegates: const [
